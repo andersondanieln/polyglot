@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSettings } from './context/SettingsContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -29,9 +29,8 @@ const App: React.FC = () => {
     });
   };
 
-  const playAudio = (type: 'start' | 'success' | 'error') => {
+  const playAudio = () => {
       try {
-       
           const audio = new Audio('/sounds/beep.mp3');
           
           audio.volume = 0.5;
@@ -49,8 +48,8 @@ const App: React.FC = () => {
     const cleanupProcessingListener = window.api.onProcessingStatusChanged(({ status }) => {
         document.body.style.cursor = status === 'start' ? 'wait' : 'default';
     });
-    const cleanupSoundListener = window.api.onPlaySound(({ type }) => {
-        playAudio(type);
+    const cleanupSoundListener = window.api.onPlaySound(() => {
+        playAudio();
     });
 
     return () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import { useTranslations } from '../hooks/useTranslations';
 import styles from '../styles/Modals.module.css';

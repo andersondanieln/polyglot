@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslations } from '../hooks/useTranslations';
 import styles from '../styles/Settings.module.css';
 
@@ -36,10 +35,8 @@ const AboutView = () => {
                 {t.aboutTitle || "About"}
             </h2>
 
-       
             <div className={styles.modernCard}>
                 <div className={styles.cardHeader}>
-              
                     <img src="/images/logo-dark.svg" alt="Polyglot Air" style={{ height: '24px' }} /> 
                     <h3>{t.missionTitle || "The Mission"}</h3>
                 </div>

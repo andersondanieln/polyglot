@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslations } from '../hooks/useTranslations';
 import styles from '../styles/Sidebar.module.css';
 

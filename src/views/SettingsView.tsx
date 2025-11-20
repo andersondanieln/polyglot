@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import { useTranslations } from '../hooks/useTranslations';
 import styles from '../styles/Settings.module.css';
 
 const SettingsView = () => {
-    const { settings, handleSettingChange } = useSettings();
+    const { settings } = useSettings();
     const t = useTranslations();
     const [localApi, setLocalApi] = useState({ type: 'ollama', url: '', key: '' });
 
