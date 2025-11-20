@@ -37,7 +37,8 @@ const AboutView = () => {
 
             <div className={styles.modernCard}>
                 <div className={styles.cardHeader}>
-                    <img src="/images/logo-dark.svg" alt="Polyglot Air" style={{ height: '24px' }} /> 
+
+                    <img src="images/logo-dark.svg" alt="Polyglot Air" style={{ height: '24px' }} /> 
                     <h3>{t.missionTitle || "The Mission"}</h3>
                 </div>
                 <div className={styles.aboutText}>

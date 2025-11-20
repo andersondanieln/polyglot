@@ -29,7 +29,13 @@ const Footer: React.FC = () => {
         className={styles.footerLeftContent}
         onClick={(e) => handleLinkClick(e, 'https://andercoder.com')}
       >
-        <div className={styles.footerIcon} />
+        <div 
+            className={styles.footerIcon} 
+            style={{ 
+                WebkitMaskImage: `url('images/andercoder.svg')`, 
+                maskImage: `url('images/andercoder.svg')` 
+            }}
+        />
         <p>
           {t.footerText}
           <strong>AnderCoder</strong>

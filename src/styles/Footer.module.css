@@ -29,8 +29,7 @@
     width: 28px;
     height: 28px;
     background-color: var(--subtext-color);
-    -webkit-mask-image: url('/images/andercoder.svg');
-    mask-image: url('/images/andercoder.svg');
+
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;

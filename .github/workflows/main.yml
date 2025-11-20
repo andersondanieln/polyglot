@@ -56,7 +56,7 @@ jobs:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: |
             <p align="center">
-              <img src="https://raw.githubusercontent.com/andersondmn/polyglot-air/main/public/logo-dark.svg" width="250">
+              <img src="https://raw.githubusercontent.com/andersondanieln/polyglot/main/public/images/logo-dark.svg" width="250">
             </p>
 
             Official release of version ${{ steps.tag_version.outputs.new_tag }}. Check out what's new:
