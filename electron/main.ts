@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut } from 'electron';
+import { app, BrowserWindow, globalShortcut, nativeImage } from 'electron';
 import path from 'path';
 import Store from 'electron-store';
 import { AppSettings } from './src/types';
@@ -85,6 +85,9 @@ function createWindow() {
 
   const isAutostart = process.argv.includes('--autostart');
 
+  const iconPath = path.join(process.env.PUBLIC, 'images/icon.png');
+  const icon = nativeImage.createFromPath(iconPath);
+
   const win = new BrowserWindow({
     show: !isAutostart, 
     width: 1000,
@@ -94,7 +97,7 @@ function createWindow() {
         autoplayPolicy: 'no-user-gesture-required' 
     },
     autoHideMenuBar: true,
-    icon: path.join(process.env.PUBLIC, 'images/icon.png'),
+    icon: icon,
   });
 
   if (process.env.VITE_DEV_SERVER_URL) {

@@ -56,7 +56,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "public/icon.png"
+      "icon": "public/images/icon.png"
     },
     "nsis": {
       "oneClick": false,
