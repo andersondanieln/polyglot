@@ -77,9 +77,9 @@ const Header = ({ ollamaStatus, onHelpClick }: HeaderProps) => {
             <div className={styles.headerControls}>
                 <div className={styles.statusIndicator}>
                     <div className={`${styles.statusDot} ${styles[ollamaStatus]}`}></div>
-                    <span>{t.ollamaStatus?.replace('{status}', ollamaStatus) || `Ollama ${ollamaStatus}`}</span>
+                    <span>{t.ollamaStatus?.replace('{status}', ollamaStatus) || `API ${ollamaStatus}`}</span>
                 </div>
-
+                
                 <button onClick={onHelpClick} className={styles.iconBtn} title={t.helpTooltip}>
                     <HelpIcon />
                 </button>

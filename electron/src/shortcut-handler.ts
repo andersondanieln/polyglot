@@ -2,14 +2,15 @@ import { globalShortcut, clipboard, Notification, BrowserWindow } from 'electron
 import { keyboard, Key } from '@nut-tree-fork/nut-js';
 import Store from 'electron-store';
 import { AppSettings } from './types';
-import { generateOllamaResponse } from './ollama-api';
+import { generateResponse } from './ollama-api';
 import { actionPrompts, translationPrompt } from './prompts';
 import { loadTranslations } from './tray-manager';
 
 let store: Store<AppSettings>;
 
 const languageMap: Record<string, string> = {
-    'pt': 'Portuguese (Brazil)',
+    'pt': 'Portuguese (Portugal)',
+    'ptbr': 'Portuguese (Brazil)',
     'br': 'Portuguese (Brazil)',
     'portugues': 'Portuguese (Brazil)',
     'en': 'English',
@@ -28,6 +29,16 @@ export function initializeShortcutHandler(appStore: Store<AppSettings>) {
   store = appStore;
 }
 
+function playSound(type: 'start' | 'success' | 'error') {
+    const settings = store.store;
+    if (settings.enableSound) {
+        const win = BrowserWindow.getAllWindows()[0];
+        if (win) {
+            win.webContents.send('play-sound', { type });
+        }
+    }
+}
+
 async function handleShortcut() {
     const originalClipboard = clipboard.readText();
     clipboard.clear();
@@ -41,6 +52,7 @@ async function handleShortcut() {
         await keyboard.releaseKey(Key.LeftControl, Key.C);
     } catch (err) {
         console.error("nut-js failed to simulate copy:", err);
+        playSound('error');
         new Notification({ title: 'Polyglot Air Error', body: t.copyError || 'Failed to copy selected text.'}).show();
         return;
     }
@@ -50,13 +62,15 @@ async function handleShortcut() {
     const selectedText = clipboard.readText();
     
     if (!selectedText || selectedText.trim() === '') {
+        playSound('error');
         new Notification({ title: 'Polyglot Air', body: t.noTextError || 'No text was copied.' }).show();
         clipboard.writeText(originalClipboard);
         return;
     }
 
     if (!settings.selectedModel) {
-        new Notification({ title: 'Polyglot Air Error', body: t.noModelError || 'No Ollama model selected.' }).show();
+        playSound('error');
+        new Notification({ title: 'Polyglot Air Error', body: t.noModelError || 'No Model selected.' }).show();
         clipboard.writeText(originalClipboard);
         return;
     }
@@ -71,7 +85,13 @@ async function handleShortcut() {
         const suffix = match[1].toLowerCase();
         textToProcess = selectedText.replace(suffixRegex, '').trim();
         
-        if (actionPrompts[suffix]) {
+        // Check Custom Prompts First
+        if (settings.customPrompts && settings.customPrompts[suffix]) {
+             prompt = settings.customPrompts[suffix].replace('${text}', textToProcess);
+             if (!prompt.includes(textToProcess)) {
+                 prompt = `${settings.customPrompts[suffix]}\n\nText:\n"""\n${textToProcess}\n"""`;
+             }
+        } else if (actionPrompts[suffix]) {
             prompt = actionPrompts[suffix](textToProcess);
         } else if (languageMap[suffix]) {
             const targetLanguage = languageMap[suffix];
@@ -90,46 +110,58 @@ async function handleShortcut() {
         silent: true,
     });
     
+    playSound('start');
     if (win) win.webContents.send('processing-status', { status: 'start' });
     progressNotification.show();
 
     console.log("\n--- NEW REQUEST ---");
-    console.log("▶️ PROMPT SENT TO OLLAMA:");
+    console.log("▶️ PROMPT SENT TO API:");
     console.log(prompt);
     console.log("--------------------");
 
     try {
-        const processedText = await generateOllamaResponse(settings.selectedModel, prompt);
+        const processedText = await generateResponse(settings, prompt);
         
-        console.log("✅ RESPONSE RECEIVED FROM OLLAMA:");
+        console.log("✅ RESPONSE RECEIVED:");
         console.log(processedText);
         console.log("--- END REQUEST ---\n");
         
         progressNotification.close();
 
         if (processedText) {
+
+            const newHistory = [{
+                original: textToProcess,
+                result: processedText,
+                timestamp: Date.now(),
+                model: settings.selectedModel
+            }, ...(settings.history || [])].slice(0, 20);
+            store.set('history', newHistory);
+            if (win) win.webContents.send('settings-updated', store.store);
+
             clipboard.writeText(processedText);
             
-            await keyboard.pressKey(Key.LeftControl, Key.V);
-            await keyboard.releaseKey(Key.LeftControl, Key.V);
+            if (!settings.copyOnly) {
+                await keyboard.pressKey(Key.LeftControl, Key.V);
+                await keyboard.releaseKey(Key.LeftControl, Key.V);
+            }
 
+            playSound('success');
             new Notification({
                 title: 'Polyglot Air',
-                body: t.processedText || 'Text processed and pasted!',
+                body: settings.copyOnly 
+                    ? (t.textCopied || 'Text processed and copied to clipboard!') 
+                    : (t.processedText || 'Text processed and pasted!'),
                 silent: true,
             }).show();
         }
     } catch (error) {
         progressNotification.close();
         console.error('Processing error:', error);
-        new Notification({ title: 'Polyglot Air Error', body: t.ollamaError || 'Failed to connect to Ollama.' }).show();
+        playSound('error');
+        new Notification({ title: 'Polyglot Air Error', body: t.ollamaError || 'Failed to connect to API.' }).show();
     } finally {
         if (win) win.webContents.send('processing-status', { status: 'end' });
-        setTimeout(() => {
-            if(clipboard.readText() !== originalClipboard) {
-                clipboard.writeText(originalClipboard);
-            }
-        }, 1000);
     }
 }
 

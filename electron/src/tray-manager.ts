@@ -45,7 +45,8 @@ export function createTray() {
     return;
   }
 
-  const iconPath = path.join(process.env.PUBLIC, 'icon.png');
+
+  const iconPath = path.join(process.env.PUBLIC, 'images/icon.png');
   try {
     const image = nativeImage.createFromPath(iconPath);
     tray = new Tray(image);

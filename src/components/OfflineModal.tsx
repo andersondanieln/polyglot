@@ -16,21 +16,25 @@ const OfflineModal = ({ onRetry }: OfflineModalProps) => {
   };
 
   return (
-    <div className="offline-modal-overlay">
+    <div className={styles.modalOverlay}>
       <div className={styles.offlineModalContent}>
-        <Logo />
-        <h2>{t.offlineTitle}</h2>
-        <p>{t.offlineMessage}</p>
+        <div style={{ marginBottom: '1.5rem' }}>
+             <Logo />
+        </div>
+        <h2>{t.offlineTitle || "API is not responding"}</h2>
+        <p>{t.offlineMessage || "Please check if your Ollama or local server is running."}</p>
+        
         <button className={styles.retryBtn} onClick={onRetry}>
-          {t.tryAgain}
+          {t.tryAgain || "Try Again"}
         </button>
+        
         <p className={styles.downloadPrompt}>
-          {t.downloadOllama?.split(' ').slice(0, -1).join(' ')}{' '}
+          {t.downloadOllama?.split('?')[0]}?{' '}
           <a href="#" onClick={handleLinkClick}>
-            {t.downloadOllama?.split(' ').pop()}
+            {t.downloadOllama?.split('?')[1] || "Download it here."}
           </a>
         </p>
-        <small>{t.offlineHint}</small>
+        <small>{t.offlineHint || "Default URL: http://localhost:11434"}</small>
       </div>
     </div>
   );

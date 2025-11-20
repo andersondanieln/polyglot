@@ -10,6 +10,7 @@ export interface Api {
   onSettingsUpdated: (callback: (settings: AppSettings) => void) => () => void;
   openExternalLink: (url: string) => Promise<void>;
   onProcessingStatusChanged: (callback: (args: { status: 'start' | 'end' }) => void) => () => void;
+  onPlaySound: (callback: (args: { type: 'start' | 'success' | 'error' }) => void) => () => void;
 }
 
 const api: Api = {
@@ -37,6 +38,12 @@ const api: Api = {
       ipcRenderer.on('processing-status', subscription);
       return () => ipcRenderer.removeListener('processing-status', subscription);
     },
+
+    onPlaySound: (callback) => {
+        const subscription = (_event: unknown, value: { type: 'start' | 'success' | 'error' }) => callback(value);
+        ipcRenderer.on('play-sound', subscription);
+        return () => ipcRenderer.removeListener('play-sound', subscription);
+    }
 };
 
 contextBridge.exposeInMainWorld('api', api);

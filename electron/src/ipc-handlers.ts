@@ -1,12 +1,14 @@
 import { ipcMain, shell, BrowserWindow } from 'electron';
 import Store from 'electron-store';
 import { AppSettings } from './types';
-import { checkOllamaStatus, getOllamaModels } from './ollama-api';
+import { checkOllamaStatus, getApiModels } from './ollama-api';
 import { registerGlobalShortcut } from './shortcut-handler';
 import { updateTrayMenu } from './tray-manager';
 
 export function setupIpcHandlers(store: Store<AppSettings>) {
-  ipcMain.handle('check-ollama-status', checkOllamaStatus);
+  ipcMain.handle('check-ollama-status', () => {
+    return checkOllamaStatus(store.store);
+  });
 
   ipcMain.handle('get-settings', () => store.store);
 
@@ -33,7 +35,9 @@ export function setupIpcHandlers(store: Store<AppSettings>) {
     },
   );
 
-  ipcMain.handle('get-ollama-models', getOllamaModels);
+  ipcMain.handle('get-ollama-models', () => {
+    return getApiModels(store.store);
+  });
 
   ipcMain.handle('open-external-link', (_event, url: string) => {
     shell.openExternal(url);

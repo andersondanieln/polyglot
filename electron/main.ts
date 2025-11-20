@@ -22,6 +22,14 @@ const store = new Store<AppSettings>({
     selectedModel: '',
     theme: 'dark',
     appLanguage: 'en',
+    apiType: 'ollama',
+    apiUrl: 'http://localhost:11434',
+    apiKey: '',
+    customPrompts: {},
+    history: [],
+    enableSound: true,
+    copyOnly: false,
+    autoLaunch: false,
   },
 });
 
@@ -42,12 +50,21 @@ app.on('second-instance', () => {
   }
 });
 
+function updateAutoLaunch(enable: boolean) {
+  app.setLoginItemSettings({
+    openAtLogin: enable,
+    path: app.getPath('exe'),
+  });
+}
+
 function startOllamaStatusPolling() {
   if (ollamaCheckInterval) {
     clearInterval(ollamaCheckInterval);
   }
+  
   ollamaCheckInterval = setInterval(async () => {
-    const { success } = await checkOllamaStatus();
+    const settings = store.store;
+    const { success } = await checkOllamaStatus(settings);
     const currentStatus = success ? 'online' : 'offline';
     if (currentStatus !== lastOllamaStatus) {
       lastOllamaStatus = currentStatus;
@@ -70,11 +87,14 @@ function createWindow() {
 
   const win = new BrowserWindow({
     show: !isAutostart, 
-    width: 800,
-    height: 650,
-    webPreferences: { preload: path.join(__dirname, 'preload.js') },
+    width: 1000,
+    height: 700,
+    webPreferences: { 
+        preload: path.join(__dirname, 'preload.js'),
+        autoplayPolicy: 'no-user-gesture-required' 
+    },
     autoHideMenuBar: true,
-    icon: path.join(process.env.PUBLIC, 'icon.png'),
+    icon: path.join(process.env.PUBLIC, 'images/icon.png'),
   });
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -106,6 +126,9 @@ app.on('window-all-closed', () => {
 });
 
 app.whenReady().then(() => {
+    const settings = store.store;
+    updateAutoLaunch(settings.autoLaunch);
+
     createWindow();
     initializeTrayManager(store);
     initializeShortcutHandler(store);
@@ -114,6 +137,10 @@ app.whenReady().then(() => {
     registerGlobalShortcut(store.get('shortcut'));
     setupIpcHandlers(store);
     startOllamaStatusPolling();
+
+    store.onDidChange('autoLaunch', (newValue) => {
+        updateAutoLaunch(!!newValue);
+    });
 
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
