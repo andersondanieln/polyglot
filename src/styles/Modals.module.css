@@ -1,3 +1,211 @@
+
+.viewContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.viewTitle {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.configSection {
+    margin-bottom: 2rem;
+    background-color: var(--card-bg-color);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.inputGroupRow {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.configInput {
+    padding: 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.configInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow);
+}
+
+.saveBtn {
+    background-color: var(--primary-color);
+    color: #1A1D1F;
+    border: none;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.saveBtn:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-1px);
+}
+
+.actionBtnSecondary, .actionBtnDanger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.actionBtnSecondary {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+}
+.actionBtnSecondary:hover {
+    border-color: var(--text-color);
+    background-color: var(--icon-btn-hover-bg);
+}
+
+.actionBtnDanger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.3);
+}
+.actionBtnDanger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.deleteActionBtn {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.deleteActionBtn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.historyCard {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+}
+.historyCard:hover {
+    border-color: var(--subtext-color);
+}
+
+.historyHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--subtext-color);
+}
+
+.historyModel {
+    background-color: var(--bg-color);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+.historyContentBlock {
+    margin-bottom: 1rem;
+}
+
+.resultBlock {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0;
+    border: 1px solid var(--border-color);
+}
+
+.resultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--subtext-color);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.contentText {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.copyBtnSmall {
+    background: transparent; 
+    border: 1px solid var(--border-color); 
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s;
+}
+.copyBtnSmall:hover {
+    background-color: var(--icon-btn-hover-bg);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+
 .modalContent {
     background-color: var(--card-bg-color);
     padding: 1.5rem 2rem;
@@ -5,7 +213,10 @@
     width: 90%;
     max-width: 550px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
 }
 
 .modalHeader {
@@ -15,10 +226,13 @@
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1rem;
     margin-bottom: 1rem;
+    flex-shrink: 0;
 }
+
 .modalHeader h2 {
     font-size: 1.3rem;
     color: var(--text-color);
+    font-weight: 600;
 }
 
 .modalCloseBtn {
@@ -29,52 +243,56 @@
     cursor: pointer; 
     line-height: 1;
     padding: 0;
+    transition: color 0.2s;
 }
 .modalCloseBtn:hover {
-    background: none;
     color: var(--text-color);
 }
 
 .modalBody {
-    max-height: 70vh;
     overflow-y: auto;
     padding-right: 0.5rem;
+    flex-grow: 1;
 }
 
-.tutorialSection {
-    margin-bottom: 2rem;
-}
-.tutorialSection:last-child {
-    margin-bottom: 0;
-}
-.tutorialSection h3 {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-}
-.tutorialSection p, .tutorialSection li {
+.hint {
+    display: block;
+    margin-bottom: 1rem;
     color: var(--subtext-color);
-    line-height: 1.6;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
-.tutorialSection ol {
-    padding-left: 1.5rem;
+.hint code {
+    background-color: var(--bg-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Fira Code', 'monospace';
+    color: var(--primary-color);
 }
 
 .langTable {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
-}
-.langTable th, .langTable td {
+    overflow: hidden;
+    border-radius: 8px;
     border: 1px solid var(--border-color);
-    padding: 0.75rem;
-    text-align: left;
 }
+.langTable table { width: 100%; border-collapse: collapse; }
 .langTable th {
     background-color: var(--bg-color);
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
+.langTable td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 1rem;
+    color: var(--text-color);
+    vertical-align: middle;
+}
+.langTable tr:last-child td { border-bottom: none; }
 .langTable code {
     background-color: var(--bg-color);
     padding: 0.2rem 0.4rem;
@@ -84,26 +302,34 @@
 }
 
 .offlineModalContent {
-    max-width: 450px;
-    padding: 2rem;
-    background-color: var(--bg-color);
-    border: none;
-    box-shadow: none;
+    max-width: 480px;
+    width: 90%;
+    padding: 2.5rem;
+    background-color: var(--card-bg-color); 
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .offlineModalContent h2 { 
     font-size: 1.5rem; 
     color: var(--text-color); 
-    margin: 2rem 0 1rem 0; 
+    margin: 1rem 0 1rem 0; 
 }
 .offlineModalContent p { 
     color: var(--subtext-color); 
     margin-bottom: 2rem; 
+    line-height: 1.5;
 }
 .offlineModalContent small { 
     margin-top: 1rem; 
     display: block; 
     color: var(--subtext-color); 
     opacity: 0.7; 
+    font-size: 0.8rem;
 }
 
 .retryBtn {
@@ -111,10 +337,12 @@
     color: #1A1D1F; 
     border: none; 
     font-weight: bold;
-    padding: 0.75rem 1.5rem; 
+    padding: 0.75rem 2rem; 
     margin-bottom: 1.5rem; 
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
 }
 .retryBtn:hover { 
     background-color: var(--primary-color-dark); 
@@ -123,7 +351,7 @@
 .downloadPrompt {
     font-size: 0.9rem;
     color: var(--subtext-color);
-    margin-bottom: 2rem !important;
+    margin-bottom: 0 !important;
 }
 
 .downloadPrompt a {

@@ -39,14 +39,16 @@ const TutorialModal = ({ onClose }: TutorialModalProps) => {
         };
     }, [onClose]);
 
-    const langSuffixCodes = ['pt', 'en', 'es', 'zh'];
-    const specialActionCodes = ['fix', 'formal', 'informal', 'friendly', 'summarize', 'shorten', 'expand'];
-
+    const langSuffixCodes = ['ptbr', 'en', 'es', 'zh'];
+    
     const translationRows = (t.targetLanguages || []).map((desc: string, index: number) => ({
         code: `::${langSuffixCodes[index]}`,
         description: desc
     }));
 
+    translationRows.unshift({ code: '::pt', description: 'Português (Portugal)' });
+
+    const specialActionCodes = ['fix', 'formal', 'informal', 'friendly', 'summarize', 'shorten', 'expand'];
     const actionRows = (t.specialActions || []).map((desc: string, index: number) => ({
         code: `::${specialActionCodes[index]}`,
         description: desc
@@ -55,7 +57,7 @@ const TutorialModal = ({ onClose }: TutorialModalProps) => {
     const allRows = [...translationRows, ...actionRows];
 
     return (
-        <div className="modal-overlay">
+        <div className={styles.modalOverlay}>
             <div className={styles.modalContent} ref={modalRef}>
                 <div className={styles.modalHeader}>
                     <h2>{t.tutorialTitle}</h2>

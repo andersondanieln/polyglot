@@ -1,18 +1,314 @@
-.settingsContainer { 
+.homeContainer {
     width: 100%;
-    max-width: 700px; 
-    margin: 0 auto; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 1.5rem; 
-    margin-bottom: 2rem;
-    height: 480px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
 }
 
-.settingsGrid { 
-    display: grid; 
-    grid-template-columns: 1fr 1.5fr; 
-    gap: 1.5rem; 
+.welcomeHeader {
+    margin-bottom: 0.5rem;
+}
+
+.welcomeHeader h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.welcomeHeader h1 span {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.welcomeHeader p {
+    color: var(--subtext-color);
+    font-size: 1rem;
+}
+
+.heroCard {
+    background: linear-gradient(135deg, var(--card-bg-color) 0%, var(--bg-color) 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroCard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+}
+
+.heroContent {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.heroIconWrapper {
+    width: 64px;
+    height: 64px;
+    background-color: var(--input-bg-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.heroText h2 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+.heroText p {
+    color: var(--subtext-color);
+    font-size: 0.9rem;
+}
+
+.shortcutDisplay {
+    background-color: var(--input-bg-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    min-width: 240px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shortcutDisplay:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(80, 212, 147, 0.15);
+    transform: translateY(-1px);
+}
+
+.shortcutDisplay input {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.shortcutDisplay.recording {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--input-focus-shadow);
+}
+
+.recordingDot {
+    width: 8px;
+    height: 8px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.modernCard {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
+
+.modernCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-color: var(--subtext-color);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.cardIcon {
+    color: var(--primary-color);
+}
+
+.cardHeader h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.cardDescription {
+    color: var(--subtext-color);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    flex-grow: 0;
+}
+
+.selectWrapper {
+    position: relative;
+    width: 100%;
+    margin-top: auto; 
+}
+
+.selectWithAction {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto; 
+}
+
+.actionButton {
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actionButton:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: var(--icon-btn-hover-bg);
+}
+
+.terminalBox {
+    background-color: #151719; 
+    border-radius: 8px;
+    margin-top: 1.5rem; 
+    padding: 0.75rem;
+    border: 1px solid #333;
+    font-family: 'Fira Code', monospace;
+    flex-shrink: 0;
+}
+
+.terminalHeader {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.terminalDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #444;
+}
+.terminalDot:nth-child(1) { background-color: #ff5f56; }
+.terminalDot:nth-child(2) { background-color: #ffbd2e; }
+.terminalDot:nth-child(3) { background-color: #27c93f; }
+
+.terminalContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminalContent code {
+    color: #a9b7c6;
+    font-size: 0.85rem;
+}
+
+.terminalCopy {
+    background: transparent;
+    border: none;
+    color: var(--subtext-color);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+.terminalCopy:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.cheatSheetCard {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cheatSheetCard:hover {
+    background-color: var(--icon-btn-hover-bg);
+    border-color: var(--subtext-color);
+}
+
+.cheatSheetContent {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconBg {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(80, 212, 147, 0.15), transparent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.cheatSheetText h3 {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    margin-bottom: 0.2rem;
+}
+.cheatSheetText p {
+    color: var(--subtext-color);
+    font-size: 0.85rem;
 }
 
 .settingItem {
@@ -24,184 +320,38 @@
     flex-direction: column;
     gap: 0.5rem;
     transition: all 0.2s ease-in-out;
+    width: 100%;
 }
 
-.settingItemButton {
-    grid-column: 1 / -1; 
-    cursor: pointer;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
-}
-.settingItemButton:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-}
-.settingItemButton h3 {
-    color: var(--primary-color);
-}
-.settingItemButton .settingItemButtonText p {
-    margin-top: 0.25rem;
-}
-
-.settingItemIcon {
-    width: 40px;
-    height: 40px;
-    filter: invert(65%) sepia(9%) saturate(264%) hue-rotate(170deg) brightness(91%) contrast(87%);
-}
-[data-theme="light"] .settingItemIcon {
-    filter: none;
-}
-
-.settingItem label, .settingItem h3 {
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 1rem;
-}
-.settingItem p { 
-    font-size: 0.85rem; 
-    color: var(--subtext-color); 
-}
-
-.shortcutShowcase {
-    background: transparent;
-    border: none;
-    padding: 0;
-    text-align: center;
+.aboutText p {
+    line-height: 1.6;
+    color: var(--subtext-color);
     margin-bottom: 1rem;
+    font-size: 0.95rem;
 }
-
-.shortcutShowcase h2 {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.aboutText p:last-child {
+    margin-bottom: 0;
 }
-.shortcutShowcase p {
-    margin-bottom: 1.5rem;
-    color: var(--subtext-color);
-}
-
-.shortcutInputWrapper {
-    width: 300px;
-    margin-inline: auto;
+.socialLinks {
     display: flex;
-    align-items: stretch;
-    background: var(--shortcut-bg-gradient);
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
-.shortcutInputWrapper:hover {
-    border-color: var(--shortcut-hover-border-color);
-}
-.shortcutInputWrapper:has(input:focus) {
-    box-shadow: 0 0 0 3px var(--input-focus-shadow);
-    border-color: var(--primary-color);
-}
-
-.shortcutIconContainer {
-    padding: 0.5rem 1.25rem;
+.socialBtn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-right: 1px solid var(--border-color);
-}
-
-.shortcutIcon {
-    width: 44px;
-    height: 44px;
-    filter: invert(65%) sepia(9%) saturate(264%) hue-rotate(170deg) brightness(91%) contrast(87%);
-}
-[data-theme="light"] .shortcutIcon {
-    filter: none;
-}
-
-.shortcutInput {
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    text-align: center;
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
-    color: var(--text-color);
-    padding: 1rem;
-    cursor: pointer;
-}
-.shortcutInput:focus {
-    outline: none;
-}
-.shortcutInput::placeholder {
-    color: var(--subtext-color);
-    font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: normal;
-    font-family: var(--font-family);
-}
-
-.inputWithButton { 
-    display: flex; 
-    gap: 0.5rem; 
-}
-.inputWithButton select { 
-    flex-grow: 1; 
-}
-
-.reloadBtn { 
-    font-size: 1.5rem; 
-    padding: 0 1rem; 
-    line-height: 1; 
-}
-
-.modelSuggestion {
-    border-top: 1px solid var(--border-color);
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-}
-.suggestionText {
-    font-size: 0.85rem;
-    color: var(--subtext-color);
-    margin-bottom: 0.25rem !important;
-    margin-top: 0 !important;
-}
-.commandBoxWrapper {
-    display: flex;
-    align-items: stretch;
-}
-.commandBox {
-    flex-grow: 1;
+    gap: 0.5rem;
     background-color: var(--input-bg-color);
-    padding: 0.5rem 0.75rem;
+    color: var(--text-color);
     border: 1px solid var(--border-color);
-    border-right: none;
-    border-radius: 8px 0 0 8px;
-    font-family: 'SF Mono', 'Fira Code', 'monospace';
-    color: var(--subtext-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
+    transition: all 0.2s;
 }
-
-.copyBtn {
-    border-radius: 0 8px 8px 0;
-    background-color: var(--primary-color);
+.socialBtn:hover {
     border-color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 0.75rem;
-    min-width: 42px;
-}
-.copyBtn:hover {
-    background-color: var(--primary-color-dark);
-}
-.copyBtn svg {
-    width: 18px;
-    height: 18px;
-    stroke: #212829;
-    stroke-width: 2.5;
+    color: var(--primary-color);
+    transform: translateY(-2px);
 }

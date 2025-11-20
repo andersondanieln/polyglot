@@ -95,7 +95,7 @@ body {
     transition: background-color 0.2s, color 0.2s;
 }
 
-select, input[type="text"] {
+select, input[type="text"], input[type="password"] {
     width: 100%;
     padding: 0.75rem;
     font-size: 1rem;
@@ -137,3 +137,78 @@ button {
     transition: background-color 0.2s;
 }
 button:hover { background-color: var(--icon-btn-hover-bg); }
+
+
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--input-bg-color);
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 2px solid var(--border-color);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"] {
+  border-radius: 6px;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #1A1D1F; 
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--subtext-color);
+}
+
+/* Radio specific */
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #1A1D1F;
+}
+
+input[type="radio"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="radio"]:hover {
+    border-color: var(--subtext-color);
+}

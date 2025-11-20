@@ -1,0 +1,43 @@
+.sidebar {
+    width: 80px; 
+    background-color: var(--card-bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    flex-shrink: 0;
+}
+
+.menuGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.menuItem {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    color: var(--subtext-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menuItem:hover {
+    background-color: var(--icon-btn-hover-bg);
+    color: var(--text-color);
+    transform: scale(1.05);
+}
+
+.menuItem.active {
+    background-color: var(--primary-color);
+    color: #1A1D1F; 
+    box-shadow: 0 4px 12px rgba(80, 212, 147, 0.4);
+}
