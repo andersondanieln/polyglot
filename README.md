@@ -34,6 +34,7 @@ But it doesn't stop there. Polyglot Air is also a powerful writing assistant. Us
 
 ---
 
+
 ## ✨ Key Features
 
 *   ### Core Feature: Intelligent Translation
@@ -62,7 +63,9 @@ But it doesn't stop there. Polyglot Air is also a powerful writing assistant. Us
 A sleek and comfortable interface that adapts to your preference, whether you work during the day or at night.
 
 <p align="center">
-  <img src="public/images/darkandlight.png" alt="Main Screen - Dark and Light Theme" width="75%">
+  
+  <img alt="Main Screen - Dark and Light Theme" width="75%" src="https://github.com/user-attachments/assets/31dd2565-80a3-4f5b-aa5f-8dda0250701e" />
+
   <br>
   <i>The application supports both light and dark modes.</i>
 </p>
@@ -71,7 +74,7 @@ A sleek and comfortable interface that adapts to your preference, whether you wo
 A clear and accessible tutorial explains all available suffix commands, making it easy to harness the full power of the application.
 
 <p align="center">
-  <img src="public/images/tutorial.gif" alt="Tutorial Modal" width="75%">
+  <img  alt="Tutorial Modal" width="75%"src="https://github.com/user-attachments/assets/32c3d6a9-c7bc-4f3b-b88d-6dad2ac98c73" />
   <br>
   <i>The built-in tutorial with all available actions.</i>
 </p>
